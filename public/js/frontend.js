@@ -1,6 +1,14 @@
+
 document.getElementById('connectButton').addEventListener('click', async () => {
+    const secondAppUrl = document.getElementById('secondAppUrl').value;
     try {
-        const response = await fetch('/connect');
+        const response = await fetch('/connect', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url: secondAppUrl })
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
