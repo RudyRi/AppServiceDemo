@@ -1,6 +1,12 @@
-
 document.getElementById('connectButton').addEventListener('click', async () => {
     const secondAppUrl = document.getElementById('secondAppUrl').value;
+    const responseMessageElement = document.getElementById('responseMessage');
+    const connectButton = document.getElementById('connectButton');
+
+    // Clear previous message and disable the button
+    responseMessageElement.innerText = 'Connecting...';
+    connectButton.disabled = true;
+
     try {
         const response = await fetch('/connect', {
             method: 'POST',
@@ -13,8 +19,11 @@ document.getElementById('connectButton').addEventListener('click', async () => {
             throw new Error('Network response was not ok');
         }
         const data = await response.text();
-        document.getElementById('responseMessage').innerText = data;
+        responseMessageElement.innerText = data;
     } catch (error) {
-        document.getElementById('responseMessage').innerText = `Failed to connect: ${error.message}`;
+        responseMessageElement.innerText = `Failed to connect: ${error.message}`;
+    } finally {
+        // Re-enable the button
+        connectButton.disabled = false;
     }
 });
