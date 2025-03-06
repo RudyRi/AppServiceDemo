@@ -1,24 +1,15 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "resourceGroupName": {
-            "value": "Demo-App-Service"
-        },
-        "name": {
-            "value": "demo-app-service"
-        },
-        "location": {
-            "value": "West US 2"
-        },
-        "hostingPlanName": {
-            "value": "demo-app-service"
-        },
-        "repoUrl": {
-            "value": "https://github.com/RudyRi/AppServiceDemo"
-        },
-        "branch": {
-            "value": "main"
-        }
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appName": {
+      "value": "my-node22-demo"
+    },
+    "sku": {
+      "value": "B1" // B1 (Basic) recommended for Linux (F1 has limitations)
+    },
+    "location": {
+      "value": "westus2"
     }
+  }
 }
