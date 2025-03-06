@@ -3,10 +3,10 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "appName": {
-      "value": "my-node22-demo"
+      "value": "Demo-Web-App"
     },
     "sku": {
-      "value": "B1" // B1 (Basic) recommended for Linux (F1 has limitations)
+      "value": "B1"
     },
     "location": {
       "value": "westus2"
