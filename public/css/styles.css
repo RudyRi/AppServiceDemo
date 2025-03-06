@@ -16,3 +16,8 @@
     width: 30%;
     height: 30%;
 }
+
+.inner-container {
+    width: 40%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the inner div */
+}
