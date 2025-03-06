@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 app.get('/connect', async (req, res) => {
   try {
     const response = await axios.get(`${SECOND_APP_URL}/status`);
-    res.send(`Connection to ${SECOND_APP_URL} was successful! Response: ${response.data} (Status: ${response.status})`);
+    res.send(`${response.data} (Status: ${response.status})`);
   } catch (error) {
     if (error.response) {
       // The request was made and the server responded with a status code
