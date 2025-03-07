@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // Use CORS middleware
 app.use(cors());
@@ -28,22 +28,24 @@ app.post('/connect', async (req, res) => {
     const response = await axios.get(`${url}/status`);
     res.send(`${response.data} (Status: ${response.status})`);
   } catch (error) {
+    // Differentiate between HTTP errors and network failures
     if (error.response) {
-      // The request was made and the server responded with a status code
-      res.status(500).send(`Failed to connect to ${url}. Status: ${error.response.status}. Error: ${error.message}`);
+      // Forward the actual status code (e.g., 403, 404)
+      res.status(error.response.status).send(`Failed: ${error.message}`);
     } else if (error.request) {
-      // The request was made but no response was received
-      res.status(500).send(`Failed to connect to ${url}. No response received. Error: ${error.message}`);
+      // No response (timeout, DNS failure)
+      res.status(504).send(`Timeout connecting to ${url}`);
     } else {
-      // Something happened in setting up the request that triggered an Error
-      res.status(500).send(`Failed to connect to ${url}. Error: ${error.message}`);
+      res.status(500).send(`Internal error: ${error.message}`);
     }
   }
 });
 
 // Endpoint to return a success message
 app.get('/status', (req, res) => {
-  res.send(`Connection to ${req.protocol}://${req.get('host')} was successful!`);
+  // Use Azure's forwarded headers to detect HTTPS
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+  res.send(`Connection to ${protocol}://${req.get('host')} was successful!`);
 });
 
 app.listen(PORT, () => {
