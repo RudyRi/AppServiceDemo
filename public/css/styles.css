@@ -1,23 +1,23 @@
 .glow {
-    animation: glow 1s infinite alternate;
-    border-radius: 50%; /* Make the image circular */
+  animation: glow 1s infinite alternate;
+  border-radius: 50%; /* Make the image circular */
 }
 
 @keyframes glow {
-    from {
-        box-shadow: 0 0 5px #fff;
-    }
-    to {
-        box-shadow: 0 0 20px #ff00ff;
-    }
+  from {
+    box-shadow: 0 0 5px #fff;
+  }
+  to {
+    box-shadow: 0 0 20px #ff00ff;
+  }
 }
 
 .img-size {
-    width: 15%;
-    height: 15%;
+  width: 15%;
+  height: 15%;
 }
 
 .inner-container {
-    width: 40%; /* Adjust the width as needed */
-    margin: 0 auto; /* Center the inner div */
+  width: 40%; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the inner div */
 }

@@ -1,8 +1,8 @@
-const express = require('express');
-const path = require('path');
-const axios = require('axios');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require("express");
+const path = require("path");
+const axios = require("axios");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
 
 const PORT = process.env.PORT;
@@ -14,15 +14,15 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Serve the index.html file
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // Endpoint to handle the connect button request
-app.post('/connect', async (req, res) => {
+app.post("/connect", async (req, res) => {
   const { url } = req.body;
   try {
     const response = await axios.get(`${url}/status`);
@@ -42,10 +42,10 @@ app.post('/connect', async (req, res) => {
 });
 
 // Endpoint to return a success message
-app.get('/status', (req, res) => {
+app.get("/status", (req, res) => {
   // Use Azure's forwarded headers to detect HTTPS
-  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
-  res.send(`Connection to ${protocol}://${req.get('host')} was successful!`);
+  const protocol = req.headers["x-forwarded-proto"] || req.protocol;
+  res.send(`Connection to ${protocol}://${req.get("host")} was successful!`);
 });
 
 app.listen(PORT, () => {
